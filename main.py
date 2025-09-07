@@ -2,10 +2,6 @@
 A simple script for the CS202 lab to demonstrate pylint.
 """
 
-# import sys # This import was unused, so it's removed.
-
-# UNUSED_VARIABLE was removed.
-
 def calculate_area(width, height):
     """Calculates the area of a rectangle."""
     if width < 0 or height < 0:
@@ -16,7 +12,6 @@ def calculate_area(width, height):
 def get_user_input():
     """Gets two numbers from the user."""
     try:
-        # Renamed 'w' and 'h' to be more descriptive.
         width_input = float(input("Enter the width: "))
         height_input = float(input("Enter the height: "))
         return width_input, height_input
@@ -24,6 +19,8 @@ def get_user_input():
         print("Invalid input. Please enter numbers only.")
         return None, None
 
+# FIX: Added a comment to disable the "too-few-public-methods" warning for this class.
+# pylint: disable=too-few-public-methods
 class Greeter:
     """A simple class to greet someone."""
     def __init__(self, person_name):
@@ -38,11 +35,13 @@ if __name__ == "__main__":
     greeter = Greeter("Student")
     greeter.greet()
 
-    width, height = get_user_input()
-    if width is not None:
-        area = calculate_area(width, height)
+    # FIX: Renamed variables to avoid the "redefined-outer-name" warning.
+    user_width, user_height = get_user_input()
+    if user_width is not None:
+        area = calculate_area(user_width, user_height)
         if area is not None:
             print(f"The area is: {area}")
 
-    # The long line has been shortened to pass the pylint check.
     print("Pylint demonstration complete.")
+
+# FIX: A blank line is added below this comment to fix the "missing-final-newline" error.
